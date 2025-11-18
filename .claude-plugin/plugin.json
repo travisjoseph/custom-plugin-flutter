@@ -1,0 +1,140 @@
+{
+  "name": "custom-plugin-flutter",
+  "displayName": "Flutter Developer Roadmap",
+  "version": "1.0.0",
+  "description": "Comprehensive Flutter development plugin with 7 specialized agents, 7 skills, and 4 commands for mastering modern Flutter development",
+  "author": "Flutter Community",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pluginagentmarketplace/custom-plugin-flutter.git"
+  },
+  "keywords": [
+    "flutter",
+    "dart",
+    "mobile-development",
+    "ui-development",
+    "state-management",
+    "backend-integration",
+    "database",
+    "performance",
+    "testing",
+    "devops",
+    "roadmap",
+    "learning"
+  ],
+  "agents": [
+    {
+      "name": "flutter-ui-development",
+      "displayName": "Flutter UI Development Specialist",
+      "description": "Expert in widget systems, layouts, Material Design, animations, and responsive design",
+      "path": "agents/01-flutter-ui-development.md"
+    },
+    {
+      "name": "state-management-architect",
+      "displayName": "State Management Architect",
+      "description": "Master of Provider, Riverpod, BLoC, GetX, and setState patterns",
+      "path": "agents/02-state-management.md"
+    },
+    {
+      "name": "backend-integration-specialist",
+      "displayName": "Backend Integration Specialist",
+      "description": "Expert in REST APIs, GraphQL, WebSockets, authentication, and Firebase",
+      "path": "agents/03-backend-integration.md"
+    },
+    {
+      "name": "database-storage-architect",
+      "displayName": "Database & Storage Architect",
+      "description": "Master of SQLite, Hive, ObjectBox, Firestore, and offline-first patterns",
+      "path": "agents/04-database-storage.md"
+    },
+    {
+      "name": "performance-optimization-engineer",
+      "displayName": "Performance Optimization Engineer",
+      "description": "Expert in build optimization, rendering, memory, images, network, and battery efficiency",
+      "path": "agents/05-performance-optimization.md"
+    },
+    {
+      "name": "testing-qa-specialist",
+      "displayName": "QA & Testing Specialist",
+      "description": "Master of unit tests, widget tests, integration tests, and CI/CD integration",
+      "path": "agents/06-testing-qa.md"
+    },
+    {
+      "name": "devops-deployment-specialist",
+      "displayName": "DevOps & Deployment Specialist",
+      "description": "Expert in CI/CD pipelines, code signing, App Store/Google Play, and monitoring",
+      "path": "agents/07-devops-deployment.md"
+    }
+  ],
+  "commands": [
+    {
+      "name": "learn",
+      "displayName": "Learn Flutter",
+      "description": "Start your Flutter learning journey with structured paths",
+      "path": "commands/learn.md"
+    },
+    {
+      "name": "browse-agent",
+      "displayName": "Browse Agents",
+      "description": "Explore all 7 specialized Flutter development agents",
+      "path": "commands/browse-agent.md"
+    },
+    {
+      "name": "assess",
+      "displayName": "Assess Knowledge",
+      "description": "Evaluate your Flutter development skills",
+      "path": "commands/assess.md"
+    },
+    {
+      "name": "projects",
+      "displayName": "Project Ideas",
+      "description": "Browse 25+ hands-on Flutter project ideas",
+      "path": "commands/projects.md"
+    }
+  ],
+  "skills": [
+    {
+      "name": "flutter-ui",
+      "displayName": "Flutter UI Development",
+      "description": "Master widget systems, layouts, Material Design, animations, and responsive design",
+      "path": "skills/flutter-ui/SKILL.md"
+    },
+    {
+      "name": "state-management",
+      "displayName": "State Management",
+      "description": "Expert in Provider, Riverpod, BLoC, GetX, and setState patterns",
+      "path": "skills/state-management/SKILL.md"
+    },
+    {
+      "name": "backend-integration",
+      "displayName": "Backend Integration",
+      "description": "Master REST APIs, GraphQL, WebSockets, authentication, and Firebase",
+      "path": "skills/backend-integration/SKILL.md"
+    },
+    {
+      "name": "database-storage",
+      "displayName": "Database & Storage",
+      "description": "Expert in SQLite, Hive, ObjectBox, Firestore, and offline-first patterns",
+      "path": "skills/database-storage/SKILL.md"
+    },
+    {
+      "name": "performance",
+      "displayName": "Performance Optimization",
+      "description": "Optimize build, rendering, memory, images, network, and battery efficiency",
+      "path": "skills/performance/SKILL.md"
+    },
+    {
+      "name": "testing",
+      "displayName": "Testing & Quality Assurance",
+      "description": "Master unit tests, widget tests, integration tests, and CI/CD integration",
+      "path": "skills/testing/SKILL.md"
+    },
+    {
+      "name": "devops",
+      "displayName": "DevOps & Deployment",
+      "description": "Expert in CI/CD pipelines, code signing, App Store/Google Play, and monitoring",
+      "path": "skills/devops/SKILL.md"
+    }
+  ]
+}

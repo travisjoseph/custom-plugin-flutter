@@ -1,0 +1,37 @@
+{
+  "hooks": [
+    {
+      "event": "user-prompt-submit",
+      "action": "log",
+      "message": "Flutter Development Plugin: Processing your request...",
+      "level": "info"
+    },
+    {
+      "event": "agent-invoke",
+      "action": "track",
+      "metadata": {
+        "plugin": "flutter-developer-roadmap",
+        "trackingEnabled": true
+      }
+    },
+    {
+      "event": "skill-invoke",
+      "action": "log",
+      "message": "Invoking Flutter skill...",
+      "level": "debug"
+    },
+    {
+      "event": "command-invoke",
+      "action": "track",
+      "metadata": {
+        "plugin": "flutter-developer-roadmap"
+      }
+    }
+  ],
+  "config": {
+    "enableLogging": true,
+    "enableTracking": true,
+    "logLevel": "info",
+    "description": "Hooks configuration for Flutter Developer Roadmap plugin"
+  }
+}
