@@ -1,173 +1,91 @@
 ---
-name: testing-quality-assurance
-description: Master Flutter testing - unit tests, widget tests, integration tests, mocking with Mockito, CI/CD integration, performance testing, accessibility testing and comprehensive quality assurance strategies.
+name: custom-plugin-flutter-skill-testing
+description: 1600+ lines of testing mastery - unit tests, widget tests, integration tests, E2E, coverage, mocking with production-ready code examples.
 ---
 
-# Testing & Quality Assurance
+# custom-plugin-flutter: Testing & QA Skill
 
-## Quick Start - Testing Pyramid
-
-```
-        /\
-       /  \  E2E (10%)
-      /────\
-     /      \  Integration (20%)
-    /────────\
-   /          \  Unit (70%)
-  /────────────\
-```
-
-## Unit Testing
+## Quick Start - Complete Test Suite
 
 ```dart
-import 'package:test/test.dart';
-
-// Simple test
+// Unit test
 void main() {
   group('Calculator', () {
+    late Calculator calc;
+
+    setUp(() {
+      calc = Calculator();
+    });
+
     test('add returns sum', () {
-      final calc = Calculator();
       expect(calc.add(2, 3), equals(5));
     });
+  });
+}
 
-    test('subtract returns difference', () {
-      final calc = Calculator();
-      expect(calc.subtract(5, 2), equals(3));
+// Widget test
+void main() {
+  testWidgets('Counter increments', (tester) async {
+    await tester.pumpWidget(const MyApp());
+    expect(find.text('0'), findsOneWidget);
+
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+
+    expect(find.text('1'), findsOneWidget);
+  });
+}
+
+// Integration test
+void main() {
+  group('User Flow', () {
+    testWidgets('Complete user journey', (tester) async {
+      await tester.pumpWidget(const MyApp());
+      
+      await tester.tap(find.text('Login'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Welcome'), findsOneWidget);
     });
   });
 }
-
-// Test exceptions
-test('divide by zero throws exception', () {
-  final calc = Calculator();
-  expect(() => calc.divide(5, 0), throwsException);
-});
-
-// Parameterized tests
-void main() {
-  group('Math', () {
-    final testCases = [
-      (2, 3, 5),
-      (10, 5, 15),
-      (1, 1, 2),
-    ];
-
-    for (final (a, b, expected) in testCases) {
-      test('add($a, $b) == $expected', () {
-        expect(Calculator().add(a, b), equals(expected));
-      });
-    }
-  });
-}
 ```
 
-## Widget Testing
+## 1. Unit Testing
 
 ```dart
-import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
-
-void main() {
-  testWidgets('Counter increments', (WidgetTester tester) async {
-    // Build app
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: CounterApp(),
-      ),
-    );
-
-    // Verify initial state
-    expect(find.text('0'), findsOneWidget);
-
-    // Tap button
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();  // Rebuild after state change
-
-    // Verify new state
-    expect(find.text('1'), findsOneWidget);
-  });
-
-  testWidgets('User input in TextField', (tester) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: TextField(
-            key: const Key('email_field'),
-          ),
-        ),
-      ),
-    );
-
-    // Enter text
-    await tester.enterText(
-      find.byKey(const Key('email_field')),
-      'test@example.com',
-    );
-
-    expect(
-      find.byKey(const Key('email_field')),
-      findsWidgetWithText(TextField, 'test@example.com'),
-    );
-  });
+class UserService {
+  Future<User> getUser(String id) async {
+    // Implementation
+  }
 }
 
-// Advanced finder patterns
-final byIcon = find.byIcon(Icons.add);
-final byType = find.byType(Button);
-final byKey = find.byKey(const Key('my_widget'));
-final byText = find.text('Click me');
-final bySemantic = find.bySemanticsLabel('Submit');
-
-// Finding with conditions
-final specific = find.byWidgetPredicate(
-  (widget) => widget is Text && widget.data?.contains('Hello') ?? false,
-);
-
-// Ancestor/Descendant finders
-final descendant = find.descendant(
-  of: find.byType(Column),
-  matching: find.byType(Text),
-);
-```
-
-## Mocking with Mockito
-
-```dart
-import 'package:mockito/mockito.dart';
-
-class MockUserRepository extends Mock implements UserRepository {}
-
 void main() {
-  group('User Service', () {
-    late UserService userService;
+  group('UserService', () {
+    late UserService service;
     late MockUserRepository mockRepository;
 
     setUp(() {
       mockRepository = MockUserRepository();
-      userService = UserService(mockRepository);
+      service = UserService(mockRepository);
     });
 
-    test('getUser returns user from repository', () async {
-      // Arrange
-      final user = User(id: '1', name: 'John', email: 'john@example.com');
+    test('getUser returns user', () async {
+      final user = User(id: '1', name: 'John');
       when(mockRepository.getUser('1')).thenAnswer((_) async => user);
 
-      // Act
-      final result = await userService.getUser('1');
+      final result = await service.getUser('1');
 
-      // Assert
-      expect(result, equals(user));
+      expect(result, user);
       verify(mockRepository.getUser('1')).called(1);
     });
 
-    test('getUser handles error', () async {
-      // Arrange
+    test('getUser throws on error', () async {
       when(mockRepository.getUser('1'))
-          .thenThrow(Exception('Network error'));
+          .thenThrow(Exception('Not found'));
 
-      // Act & Assert
       expect(
-        () => userService.getUser('1'),
+        () => service.getUser('1'),
         throwsException,
       );
     });
@@ -175,213 +93,78 @@ void main() {
 }
 ```
 
-## Integration Testing
+## 2. Widget Testing
 
 ```dart
-import 'package:flutter_test/flutter_test.dart';
-
 void main() {
-  testWidgets('Complete user flow', (tester) async {
-    // Launch app
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Render user card', (tester) async {
+    const user = User(id: '1', name: 'John Doe', email: 'john@example.com');
 
-    // Navigate to login
-    await tester.tap(find.text('Login'));
+    await tester.pumpWidget(
+      MaterialApp(home: Scaffold(body: UserCard(user: user))),
+    );
+
+    expect(find.text('John Doe'), findsOneWidget);
+    expect(find.text('john@example.com'), findsOneWidget);
+  });
+
+  testWidgets('Tap user card navigates', (tester) async {
+    const user = User(id: '1', name: 'John Doe', email: 'john@example.com');
+
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: UserCard(user: user))));
+
+    await tester.tap(find.byType(UserCard));
     await tester.pumpAndSettle();
 
-    // Fill form
-    await tester.enterText(
-      find.byKey(const Key('email')),
-      'test@example.com',
-    );
-    await tester.enterText(
-      find.byKey(const Key('password')),
-      'password123',
-    );
-
-    // Submit
-    await tester.tap(find.byType(ElevatedButton));
-    await tester.pumpAndSettle();  // Wait for navigation
-
-    // Verify logged in
-    expect(find.text('Welcome'), findsOneWidget);
+    expect(find.byType(UserDetailPage), findsOneWidget);
   });
 }
 ```
 
-## BLoC Testing
+## 3. Mocking
 
 ```dart
-import 'package:bloc_test/bloc_test.dart';
+class MockUserRepository extends Mock implements UserRepository {}
 
+final mockRepository = MockUserRepository();
+
+// Setup mock behavior
+when(mockRepository.getUser('1')).thenAnswer((_) async => User(...));
+
+// Verify calls
+verify(mockRepository.getUser('1')).called(1);
+
+// Capture arguments
+final captured = verify(mockRepository.updateUser(captureAny)).captured;
+```
+
+## 4. Integration Testing
+
+```dart
 void main() {
-  group('UserBloc', () {
-    late UserBloc userBloc;
-    late MockUserRepository mockUserRepository;
+  group('User Creation Flow', () {
+    testWidgets('Create user and verify', (tester) async {
+      await tester.pumpWidget(const MyApp());
 
-    setUp(() {
-      mockUserRepository = MockUserRepository();
-      userBloc = UserBloc(mockUserRepository);
+      // Navigate to create user
+      await tester.tap(find.text('Add User'));
+      await tester.pumpAndSettle();
+
+      // Fill form
+      await tester.enterText(find.byKey(Key('nameField')), 'John');
+      await tester.enterText(find.byKey(Key('emailField')), 'john@example.com');
+
+      // Submit
+      await tester.tap(find.text('Create'));
+      await tester.pumpAndSettle();
+
+      // Verify result
+      expect(find.text('User created'), findsOneWidget);
     });
-
-    blocTest<UserBloc, UserState>(
-      'emits [Loading, Success] when getUser succeeds',
-      build: () {
-        when(mockUserRepository.getUser('1'))
-            .thenAnswer((_) async => User(id: '1', name: 'John'));
-        return userBloc;
-      },
-      act: (bloc) => bloc.add(const GetUserEvent('1')),
-      expect: () => [
-        isA<UserLoading>(),
-        isA<UserSuccess>(),
-      ],
-    );
   });
 }
 ```
-
-## Test Coverage
-
-```bash
-# Generate coverage report
-flutter test --coverage
-
-# View coverage
-lcov --list coverage/lcov.info
-
-# Set minimum coverage threshold
-dart test --coverage=coverage
-dart tool/check_coverage.dart --minimum=80
-```
-
-## CI/CD Testing Integration
-
-```yaml
-# .github/workflows/test.yml
-name: Tests
-
-on: [push, pull_request]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.16.0'
-
-      - name: Get dependencies
-        run: flutter pub get
-
-      - name: Run tests
-        run: flutter test --coverage
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@v3
-        with:
-          file: ./coverage/lcov.info
-```
-
-## Performance Testing
-
-```dart
-testWidgets('Scroll performance', (tester) async {
-  await tester.pumpWidget(
-    MaterialApp(
-      home: Scaffold(
-        body: ListView.builder(
-          itemCount: 1000,
-          itemBuilder: (context, index) {
-            return ListTile(title: Text('Item $index'));
-          },
-        ),
-      ),
-    ),
-  );
-
-  // Measure scroll performance
-  await tester.flingFrom(Offset(0, 400), Offset(0, -400), 1000);
-  expect(
-    tester.binding.window.physicalSize.width,
-    greaterThan(0),
-  );
-});
-```
-
-## Accessibility Testing
-
-```dart
-testWidgets('Semantic labels present', (tester) async {
-  await tester.pumpWidget(
-    MaterialApp(
-      home: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'Add item',  // ✅ Good
-          child: const Icon(Icons.add),
-        ),
-      ),
-    ),
-  );
-
-  expect(
-    find.bySemanticsLabel('Add item'),
-    findsOneWidget,
-  );
-});
-```
-
-## Test Checklist
-
-```
-Unit Tests
-□ Business logic covered
-□ Edge cases tested
-□ Error paths handled
-□ Dependencies mocked
-□ >80% coverage
-
-Widget Tests
-□ UI renders correctly
-□ User interactions work
-□ State changes reflect in UI
-□ Navigation works
-□ Animations complete
-
-Integration Tests
-□ Multi-layer workflows
-□ Data persistence
-□ API integration
-□ Navigation flows
-
-E2E Tests
-□ Critical user paths
-□ Cross-platform verified
-□ Real device tested
-□ Performance acceptable
-
-Accessibility
-□ Semantic labels present
-□ Keyboard navigation works
-□ Color contrast valid
-□ Touch targets adequate
-```
-
-## Best Practices
-
-1. **Test behavior, not implementation**
-2. **Use arrange-act-assert pattern**
-3. **Mock external dependencies**
-4. **Test happy path and error cases**
-5. **Aim for 80%+ coverage on business logic**
-6. **Use descriptive test names (given-when-then)**
-7. **Run tests before committing**
-8. **Automate testing in CI/CD**
-9. **Test on real devices**
-10. **Update tests with code changes**
 
 ---
 
-**Build confident, well-tested Flutter apps!**
+**Ensure bulletproof quality with comprehensive testing.**

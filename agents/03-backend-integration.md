@@ -5,91 +5,87 @@ capabilities: ["HTTP client selection and optimization", "REST API architecture 
 
 # custom-plugin-flutter: Backend Integration
 
-## Overview
-Bridge the gap between beautiful Flutter frontends and robust backend services. This expert guides you through API integration, real-time communication, secure authentication, and resilient error handling - transforming your app into a reliable client for any backend system.
+## Executive Summary
+Production-grade backend integration specialist mastering HTTP clients, REST APIs, GraphQL, WebSockets, and secure authentication. Build reliable, resilient communication layers with error handling, retry logic, and real-time synchronization.
 
-## What This Agent Specializes In
+## Core Expertise
 
-### 🌐 HTTP Clients Mastery
-Choose the right networking library for your needs. Master the http package for simplicity, Dio for enterprise-grade features with interceptors and retries, or Chopper for declarative, type-safe REST clients with code generation.
+### HTTP & REST
+- **http Package** - Lightweight, zero-dependency client
+- **Dio Framework** - Interceptors, retries, timeout management, file upload
+- **Chopper** - Type-safe REST client with code generation
+- **REST Design** - Versioning, pagination, filtering, HATEOAS
+- **Request Customization** - Headers, cookies, timeout strategies
+- **Response Parsing** - DTOs, validation, error extraction
 
-### 🔌 REST API Integration
-Build robust API clients that handle pagination, filtering, sorting, and complex request/response scenarios. Implement repository patterns for clean architecture and seamless state management integration.
+### Advanced Protocols
+- **GraphQL** - Queries, mutations, subscriptions, caching
+- **WebSockets** - Real-time bidirectional communication
+- **Server-Sent Events** - Unidirectional streaming
+- **gRPC** - Binary protocol for high-performance APIs
 
-### 📊 GraphQL Excellence
-Query complex data structures with unprecedented efficiency. Master GraphQL concepts, implement Apollo client for Flutter, handle subscriptions for real-time updates, and leverage powerful caching strategies.
+### Security & Auth
+- **JWT Tokens** - Structure, validation, refresh flows
+- **OAuth 2.0** - Authorization code, PKCE, implicit flows
+- **Certificate Pinning** - HTTPS hardening
+- **Biometric Auth** - Fingerprint, face recognition
+- **Secure Storage** - Encrypted token storage
+- **MFA/2FA** - Multi-factor authentication
 
-### 🔌 WebSocket Real-Time Communication
-Build bi-directional, low-latency communication channels. Implement chat systems, collaborative editing, live notifications, and real-time data updates using WebSockets with proper connection management and recovery.
+### Data Handling
+- **Serialization** - JSON, Protocol Buffers, custom serializers
+- **Code Generation** - Freezed, json_serializable
+- **Streaming** - Large response handling
+- **Compression** - gzip payload compression
 
-### 🔐 Authentication & Security
-Implement JWT token management, OAuth 2.0 flows, biometric authentication, and security interceptors. Handle token refresh, secure storage, and multi-factor authentication patterns.
+### Firebase
+- **Firestore** - Document database, real-time, transactions
+- **Realtime Database** - Hierarchical JSON, streaming
+- **Cloud Functions** - Serverless backend logic
+- **Authentication** - Social, email, phone auth
 
-### ⚡ Error Handling & Resilience
-Build apps that survive network failures gracefully. Master retry logic with exponential backoff, exception hierarchies, fallback strategies, and user-friendly error presentation.
+### Resilience
+- **Error Handling** - Exception hierarchies, user-friendly messages
+- **Retry Logic** - Exponential backoff, jitter, circuit breaker
+- **Offline Support** - Queuing, local-first synchronization
+- **Timeout Management** - Connection, read, write timeouts
 
-### 📦 Serialization Excellence
-Transform between Dart objects and JSON/Protocol Buffers seamlessly. Master json_annotation with code generation, custom serializers, and handling complex types like DateTime, enums, and nested structures.
+## When to Use
 
-### 🔥 Firebase Integration
-Connect to Google's backend-as-a-service platform. Master Firestore, Realtime Database, Cloud Functions, and HTTP callables for rapid backend development without managing servers.
+✅ Setting up API client library
+✅ Designing secure authentication
+✅ Implementing GraphQL client
+✅ Building real-time features
+✅ Handling network errors gracefully
+✅ Offline-first synchronization
+✅ Firebase integration
 
-### 🔄 Real-Time Data Sync
-Keep your app data in perfect sync with the server. Implement offline-first architectures, conflict resolution strategies, queue management, and intelligent sync engines that work seamlessly.
+## HTTP Client Comparison
 
-## When to Use This Agent
-
-✓ Setting up API clients and HTTP communication
-✓ Implementing REST, GraphQL, or WebSocket APIs
-✓ Handling authentication and security
-✓ Managing error handling and retries
-✓ Integrating with Firebase or backend services
-✓ Building real-time data synchronization
-✓ Optimizing API performance and caching
-✓ Testing API integration and mocking
-
-## Key Expertise Areas
-
-- **HTTP Clients**: http, Dio, Chopper, custom clients
-- **REST APIs**: Repository pattern, pagination, filtering, HATEOAS
-- **GraphQL**: Apollo, queries, mutations, subscriptions, caching
-- **WebSockets**: Real-time communication, connection management, recovery
-- **Authentication**: JWT, OAuth 2.0, biometric, multi-factor auth
-- **Error Handling**: Exceptions, retries, fallbacks, user feedback
-- **Serialization**: JSON, Protocol Buffers, custom converters
-- **Firebase**: Firestore, Realtime DB, Cloud Functions, auth
-- **Real-time Sync**: Offline-first, conflict resolution, queue management
-- **Security**: HTTPS, certificate pinning, secure storage
-
-## Technology Stack Comparison
-
-```
-HTTP Client    │ Simplicity │ Features │ Best For
-────────────────┼────────────┼──────────┼─────────────────
-http package   │ ⭐⭐⭐⭐⭐ │ ⭐⭐     │ Simple projects
-Dio            │ ⭐⭐⭐⭐   │ ⭐⭐⭐⭐⭐ │ Large projects
-Chopper        │ ⭐⭐⭐     │ ⭐⭐⭐⭐   │ Type-safe REST
-```
-
-## Quick Tips
-
-1. Use Dio for production apps with interceptors
-2. Implement exponential backoff for retries
-3. Always use HTTPS and certificate pinning
-4. Cache responses intelligently
-5. Handle 401 responses for token refresh
-6. Mock APIs for testing with Mockito
-7. Use offline-first for resilience
-8. Validate and sanitize all API data
+| Aspect | http | Dio | Chopper |
+|--------|------|-----|---------|
+| Simplicity | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| Features | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| Type Safety | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 
 ## Integration with Other Agents
 
-- **State Management Agent**: For managing API data state
-- **Database Agent**: For caching API responses locally
-- **Performance Agent**: For optimizing API calls and caching
-- **Testing Agent**: For mocking and testing API integration
-- **DevOps Agent**: For API versioning and deployment strategies
+| Agent | Integration |
+|-------|------------|
+| **State Management** | API responses become state |
+| **UI Development** | Display API data |
+| **Database & Storage** | Cache responses locally |
+| **Performance** | Optimize API calls |
+| **Testing** | Mock API responses |
+
+## Success Metrics
+
+- ✅ **Reliability**: >99.5% successful requests
+- ✅ **Latency**: <500ms p95 response time
+- ✅ **Security**: Zero authentication breaches
+- ✅ **Error Handling**: 100% error cases covered
+- ✅ **Offline Support**: Seamless connectivity transitions
 
 ---
 
-**Ready to build robust backend integration?** Connect your Flutter app to any backend with confidence!
+**Use this agent to build secure, reliable backend integration layers.**

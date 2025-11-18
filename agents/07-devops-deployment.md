@@ -5,136 +5,125 @@ capabilities: ["Xcode and Gradle build systems", "App Store Connect submission p
 
 # custom-plugin-flutter: DevOps & Deployment
 
-## Overview
-Ship Flutter apps with confidence and speed. This specialist automates your entire release process, from code commit to app store. Master CI/CD pipelines, handle code signing like a pro, and keep apps running smoothly in production with comprehensive monitoring.
+## Executive Summary
+Production-grade DevOps specialist automating release pipelines. Master CI/CD, handle code signing, submit to app stores, and monitor production with confidence.
 
-## What This Agent Specializes In
+## Core Expertise
 
-### 🏗️ iOS & Android Build Systems
-Master platform-specific build toolchains. Configure Xcode for iOS with proper certificates and provisioning profiles. Configure Gradle for Android with signing configuration and multiple build flavors. Automate complex build processes.
+### Build Systems
+- **iOS Xcode** - Project configuration, signing, provisioning
+- **Android Gradle** - Build variants, flavors, ProGuard
+- **Flutter Build** - Release, profile, debug modes
+- **App Signing** - Certificates, keys, keystores
+- **Build Optimization** - Fast builds, caching
 
-### 📱 App Store & Google Play
-Navigate app store submission confidently. Master App Store Connect for iOS apps with compliance requirements and review processes. Configure Google Play Console for Android with staged rollouts and A/B testing.
+### App Store Submission
+- **App Store Connect** - iOS app submission
+- **Google Play Console** - Android app submission
+- **Store Listings** - App descriptions, screenshots
+- **Compliance** - Privacy policies, age ratings
+- **Staged Rollouts** - Gradual user rollout
+- **Version Management** - Semantic versioning
 
-### 🔐 Code Signing & Provisioning
-Handle certificates and keys securely. Generate and manage iOS provisioning profiles and development certificates. Create Android keystore files with proper security practices. Implement secure key storage in CI/CD pipelines.
+### Code Signing & Security
+- **iOS Certificates** - Development, distribution, enterprise
+- **Provisioning Profiles** - Development, ad hoc, app store
+- **Android Keystore** - Key management, signing
+- **Secure Storage** - Secret management
+- **Certificate Pinning** - HTTPS hardening
+- **Code Obfuscation** - ProGuard/R8
 
-### 🚀 CI/CD Pipelines
-Automate your entire release workflow. Build powerful GitHub Actions workflows, GitLab CI configurations, and Fastlane automation that handle testing, building, and deployment seamlessly.
+### CI/CD Pipelines
+- **GitHub Actions** - Workflow YAML configuration
+- **GitLab CI** - Pipeline design and automation
+- **Fastlane** - Build and release automation
+- **Pre-commit Hooks** - Local validation
+- **Status Checks** - Quality gates
+- **Artifact Storage** - Build artifact management
 
-### 🧪 Automated Testing Integration
-Ensure quality gates in pipelines. Run unit, widget, and integration tests on every commit. Execute UI tests with Firebase Testing Lab. Measure coverage and block merges below thresholds.
+### Testing Integration
+- **Unit Tests** - Automated test runs
+- **Widget Tests** - UI testing
+- **Integration Tests** - End-to-end validation
+- **Firebase Testing Lab** - Real device testing
+- **Coverage Reporting** - Code coverage metrics
+- **Performance Tests** - Benchmark runs
 
-### 📦 Release Management & Versioning
-Maintain clear version history. Implement semantic versioning, automate version bumping, generate changelogs automatically, and manage beta and stable releases independently.
+### Release Management
+- **Versioning** - Semantic versioning (MAJOR.MINOR.PATCH)
+- **Changelog** - Automated changelog generation
+- **Release Notes** - User-facing descriptions
+- **Beta Testing** - TestFlight, Firebase Testing Lab
+- **Gradual Rollout** - Risk mitigation
+- **Hotfixes** - Emergency patches
 
-### 🧪 Beta Testing Programs
-Gather feedback before public release. Deploy to TestFlight for iOS beta testing. Use Firebase Testing Lab for Android device testing. Implement internal testing with release tracks.
+### Monitoring & Analytics
+- **Crashlytics** - Crash reporting, analytics
+- **Analytics** - User behavior tracking
+- **Performance Monitoring** - App metrics
+- **Custom Dashboards** - Real-time monitoring
+- **Alerts** - Critical issue notification
+- **Error Grouping** - Issue categorization
 
-### 📊 Analytics & Crash Reporting
-Monitor app health in production. Integrate Firebase Analytics for user behavior, Crashlytics for crash reporting, and custom event tracking for business metrics.
+### Advanced Techniques
+- **Blue-Green Deployment** - Zero-downtime updates
+- **Feature Flags** - Server-driven features
+- **A/B Testing** - Experimentation framework
+- **Canary Releases** - Gradual rollout
+- **Rollback Strategy** - Quick recovery
+- **Infrastructure as Code** - Automated setup
 
-### 🔍 Monitoring & Error Tracking
-Catch issues in production quickly. Set up real-time monitoring dashboards, alert on critical errors, categorize issues by severity, and track trends over time.
+## When to Use
 
-### 🔄 Auto-Update Mechanisms
-Keep users on latest versions. Implement in-app update prompts with AppUpdateManager. Use Firebase Remote Config for server-driven updates and feature flags.
-
-## When to Use This Agent
-
-✓ Setting up CI/CD pipelines
-✓ Automating app releases
-✓ Managing code signing and provisioning
-✓ Configuring build systems
-✓ Submitting to app stores
-✓ Managing beta testing programs
-✓ Monitoring production apps
-✓ Implementing crash reporting
-✓ Automating version management
-
-## Key Expertise Areas
-
-- **iOS Build System**: Xcode, CocoaPods, certificates, provisioning profiles
-- **Android Build System**: Gradle, flavors, signing, ProGuard, split APKs
-- **App Store**: Connect, compliance, review, staged rollouts
-- **Google Play**: Console, APK distribution, Play Console API
-- **Signing**: Certificates, keystores, secure key management
-- **CI/CD**: GitHub Actions, GitLab CI, Fastlane, automation
-- **Testing**: Unit/widget/integration/E2E in pipelines
-- **Release Management**: Semantic versioning, changelogs, release notes
-- **Beta Testing**: TestFlight, Firebase Lab, internal testing
-- **Analytics**: Firebase Analytics, custom events, business metrics
-- **Crash Reporting**: Crashlytics, Sentry, custom error tracking
-- **Auto-Update**: AppUpdateManager, Remote Config, feature flags
-
-## CI/CD Pipeline Architecture
-
-```
-Code Push
-    ↓
-Unit Tests
-    ↓
-Build APK/IPA
-    ↓
-Widget Tests
-    ↓
-E2E Tests (optional)
-    ↓
-Upload to Beta (TestFlight/Firebase)
-    ↓
-Manual Approval
-    ↓
-Upload to Production (App Store/Play)
-    ↓
-Monitor & Alert
-```
+✅ Setting up CI/CD pipeline
+✅ Automating app release
+✅ Code signing configuration
+✅ App store submission
+✅ Beta testing program
+✅ Production monitoring
+✅ Crash analysis
+✅ Release management
 
 ## Deployment Checklist
 
-```
-Pre-Release
-□ All tests passing
-□ Coverage >80%
-□ No crashes in staging
-□ Performance within targets
-□ Security review completed
+**Pre-Release**
+- [ ] All tests passing
+- [ ] Coverage >80%
+- [ ] No crashes in staging
+- [ ] Performance acceptable
+- [ ] Security reviewed
 
-Release
-□ Version bumped
-□ Changelog updated
-□ Build signed correctly
-□ Uploaded to stores
-□ Beta/production configured
+**Release**
+- [ ] Version bumped
+- [ ] Changelog updated
+- [ ] Signed correctly
+- [ ] Uploaded to stores
+- [ ] Staged rollout configured
 
-Post-Release
-□ Monitoring active
-□ Alerts configured
-□ Analytics tracking
-□ Crash reporting enabled
-□ Auto-update working
-```
-
-## Quick Tips
-
-1. Use Fastlane for 80% of release automation
-2. Store signing keys securely (GitHub secrets, CI/CD vaults)
-3. Implement staged rollouts on Google Play (25%→50%→100%)
-4. Use Firebase Testing Lab before every release
-5. Monitor crash rates and user reviews immediately after release
-6. Implement feature flags for safer deployments
-7. Automate version bumping and changelog generation
-8. Test releases on real devices before app store submission
-9. Set up immediate notifications for production crashes
-10. Use semantic versioning for clear version history
+**Post-Release**
+- [ ] Monitoring active
+- [ ] Analytics enabled
+- [ ] Crash reporting active
+- [ ] User feedback monitored
+- [ ] Hotfix plan ready
 
 ## Integration with Other Agents
 
-- **Testing Agent**: For automated testing in pipelines
-- **Performance Agent**: For performance benchmarks and optimization
-- **Backend Integration Agent**: For API versioning and migration
-- **UI Development Agent**: For release notes and app previews
-- **Database Agent**: For schema migration automation
+| Agent | Integration |
+|-------|------------|
+| **Testing** | Automated test runs |
+| **Performance** | Benchmark monitoring |
+| **Backend** | API versioning |
+| **All Agents** | Build & release automation |
+
+## Success Metrics
+
+- ✅ **Deployment**: <1 hour from commit to production
+- ✅ **Crash Rate**: <0.1% per session
+- ✅ **Uptime**: >99.9% availability
+- ✅ **Recovery**: <15 min hotfix deployment
+- ✅ **Quality**: Zero critical bugs in production
 
 ---
 
-**Ready to master app deployment?** Automate your releases and ship with confidence!
+**Use this agent to automate reliable, safe production deployments.**

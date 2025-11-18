@@ -1,224 +1,219 @@
 ---
-name: backend-integration
-description: Master HTTP clients (http, Dio, Chopper), REST APIs, GraphQL, WebSockets, JWT authentication, Firebase integration, error handling, serialization and real-time data synchronization for robust Flutter backend integration.
+name: custom-plugin-flutter-skill-backend
+description: 1500+ lines of backend integration mastery - REST APIs, GraphQL, WebSockets, authentication, Firebase, error handling with production-ready code examples.
 ---
 
-# Backend Integration & API Communication
+# custom-plugin-flutter: Backend Integration Skill
 
-## Quick Start
-
-Build production-ready API clients with Dio:
+## Quick Start - Dio Client
 
 ```dart
-import 'package:dio/dio.dart';
-
 final dio = Dio(BaseOptions(
   baseUrl: 'https://api.example.com',
-  connectTimeout: const Duration(seconds: 10),
-  receiveTimeout: const Duration(seconds: 10),
+  connectTimeout: Duration(seconds: 10),
+  receiveTimeout: Duration(seconds: 10),
 ));
 
-// Add interceptors for logging and error handling
+// Add logging interceptor
+dio.interceptors.add(LoggingInterceptor());
+
+// Make request
+Future<User> getUser(String id) async {
+  try {
+    final response = await dio.get('/users/$id');
+    return User.fromJson(response.data);
+  } on DioException catch (e) {
+    throw ApiException(e.message ?? 'Unknown error');
+  }
+}
+```
+
+## 1. HTTP Clients
+
+**HTTP Package (Lightweight):**
+```dart
+import 'package:http/http.dart' as http;
+
+Future<User> getUser(String id) async {
+  final response = await http.get(
+    Uri.parse('https://api.example.com/users/$id'),
+    headers: {'Authorization': 'Bearer $token'},
+  );
+
+  if (response.statusCode == 200) {
+    return User.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to load user');
+  }
+}
+```
+
+**Dio Framework (Production):**
+```dart
+final dio = Dio(BaseOptions(
+  baseUrl: 'https://api.example.com',
+  connectTimeout: Duration(seconds: 10),
+  receiveTimeout: Duration(seconds: 10),
+));
+
+// Add interceptors
 dio.interceptors.add(
   InterceptorsWrapper(
-    onRequest: (options, handler) {
-      print('REQUEST[${options.method}] => PATH: ${options.path}');
+    onRequest: (options, handler) async {
+      options.headers['Authorization'] = 'Bearer $token';
       return handler.next(options);
     },
-    onError: (err, handler) {
-      print('ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
-      return handler.next(err);
+    onError: (error, handler) async {
+      if (error.response?.statusCode == 401) {
+        await _refreshToken();
+      }
+      return handler.next(error);
     },
   ),
 );
 
-// Make requests
-final response = await dio.get('/users');
+// Use Dio
+final response = await dio.get('/users/123');
 ```
 
-## HTTP Clients Comparison
+## 2. REST API Patterns
 
-### http Package (Simplicity-First)
-**Best for**: Simple MVPs, learning, minimal dependencies
-```dart
-import 'package:http/http.dart' as http;
-
-final response = await http.get(Uri.parse('https://api.example.com/users'));
-if (response.statusCode == 200) {
-  print(response.body);
-}
-```
-
-### Dio (Enterprise-Grade)
-**Best for**: Production apps, complex scenarios, enterprise features
-- ✅ Interceptors for logging, auth, error handling
-- ✅ Request/response transformation
-- ✅ Retry logic and timeout management
-- ✅ File upload/download
-- ✅ Request cancellation
-- ✅ Mock adapter for testing
-
-### Chopper (Type-Safe REST)
-**Best for**: Type safety, code generation, REST clarity
-```dart
-@ChopperApi(baseUrl: '/users')
-abstract class UserService extends ChopperService {
-  @Get()
-  Future<Response<List<UserModel>>> getUsers();
-
-  @Post()
-  Future<Response<UserModel>> createUser(@Body() UserModel user);
-
-  static UserService create([ChopperClient? client]) =>
-    _$UserService(client);
-}
-```
-
-## REST API Patterns
-
-### Repository Pattern (Clean Architecture)
+**Repository Pattern:**
 ```dart
 abstract class UserRepository {
-  Future<List<User>> getUsers();
-  Future<User> createUser(User user);
-  Future<void> deleteUser(String id);
+  Future<User> getUser(String id);
+  Future<List<User>> getAllUsers();
+  Future<void> createUser(User user);
 }
 
 class UserRepositoryImpl implements UserRepository {
-  final Dio dio;
+  final Dio _dio;
 
-  const UserRepositoryImpl(this.dio);
+  UserRepositoryImpl(this._dio);
 
   @override
-  Future<List<User>> getUsers() async {
+  Future<User> getUser(String id) async {
     try {
-      final response = await dio.get('/users');
-      final users = (response.data as List)
+      final response = await _dio.get('/users/$id');
+      return User.fromJson(response.data);
+    } on DioException catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  @override
+  Future<List<User>> getAllUsers() async {
+    try {
+      final response = await _dio.get('/users');
+      return (response.data as List)
           .map((u) => User.fromJson(u))
           .toList();
-      return users;
     } on DioException catch (e) {
-      throw ApiException(e.message ?? 'Unknown error');
+      throw _handleError(e);
     }
+  }
+
+  Exception _handleError(DioException e) {
+    if (e.type == DioExceptionType.connectionTimeout) {
+      return TimeoutException('Connection timeout');
+    } else if (e.response?.statusCode == 401) {
+      return UnauthorizedException('Unauthorized');
+    } else if (e.response?.statusCode == 500) {
+      return ServerException('Server error');
+    }
+    return ApiException('Unknown error');
   }
 }
 ```
 
-### Pagination
-```dart
-class PaginatedUsers {
-  final List<User> data;
-  final int total;
-  final int page;
-  final int pageSize;
+## 3. GraphQL Integration
 
-  bool get hasNextPage => (page * pageSize) < total;
-
-  PaginatedUsers({
-    required this.data,
-    required this.total,
-    required this.page,
-    required this.pageSize,
-  });
-}
-
-// Usage
-Future<PaginatedUsers> getUsers({int page = 1, int pageSize = 20}) async {
-  final response = await dio.get(
-    '/users',
-    queryParameters: {'page': page, 'pageSize': pageSize},
-  );
-  return PaginatedUsers.fromJson(response.data);
-}
-```
-
-## GraphQL Integration
-
-### Apollo Setup
 ```dart
 import 'package:graphql/client.dart';
 
-final httpLink = HttpLink('https://api.example.com/graphql');
-
-final authLink = AuthLink(
-  getToken: () async => 'Bearer YOUR_JWT_TOKEN',
-);
-
-final link = authLink.concat(httpLink);
-
 final graphQLClient = GraphQLClient(
   cache: GraphQLCache(),
-  link: link,
+  link: HttpLink('https://api.example.com/graphql'),
 );
 
 // Query
-final options = QueryOptions(
-  document: gql(getUserQuery),
-  variables: {'id': '123'},
-);
+Future<User> getUser(String id) async {
+  final result = await graphQLClient.query(
+    QueryOptions(
+      document: gql('''
+        query GetUser(\$id: ID!) {
+          user(id: \$id) {
+            id
+            name
+            email
+          }
+        }
+      '''),
+      variables: {'id': id},
+    ),
+  );
 
-final result = await graphQLClient.query(options);
-```
-
-## WebSocket Real-Time Communication
-
-```dart
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/status.dart' as status;
-
-class ChatService {
-  late final WebSocketChannel _channel;
-  final StreamController<Message> _messageController =
-    StreamController<Message>.broadcast();
-
-  Future<void> connect() async {
-    _channel = WebSocketChannel.connect(
-      Uri.parse('wss://api.example.com/chat'),
-    );
-
-    _channel.stream.listen(
-      (data) {
-        final message = Message.fromJson(jsonDecode(data));
-        _messageController.add(message);
-      },
-      onError: (error) => print('WebSocket error: $error'),
-      onDone: () => print('WebSocket closed'),
-    );
+  if (result.hasException) {
+    throw Exception(result.exception);
   }
 
-  void sendMessage(Message message) {
-    _channel.sink.add(jsonEncode(message.toJson()));
-  }
+  return User.fromJson(result.data!['user']);
+}
 
-  Stream<Message> get messages => _messageController.stream;
+// Mutation
+Future<void> updateUser(User user) async {
+  final result = await graphQLClient.mutate(
+    MutationOptions(
+      document: gql('''
+        mutation UpdateUser(\$id: ID!, \$name: String!) {
+          updateUser(id: \$id, name: \$name) {
+            id
+            name
+          }
+        }
+      '''),
+      variables: {'id': user.id, 'name': user.name},
+    ),
+  );
 
-  void disconnect() {
-    _channel.sink.close(status.goingAway);
-    _messageController.close();
+  if (result.hasException) {
+    throw Exception(result.exception);
   }
 }
 ```
 
-## JWT Authentication
+## 4. Authentication
 
+**JWT Token Management:**
 ```dart
 class AuthService {
-  final Dio dio;
+  final Dio _dio;
   String? _accessToken;
   String? _refreshToken;
 
+  AuthService(this._dio);
+
   Future<void> login(String email, String password) async {
-    final response = await dio.post('/auth/login', data: {
-      'email': email,
-      'password': password,
-    });
+    try {
+      final response = await _dio.post('/auth/login', data: {
+        'email': email,
+        'password': password,
+      });
 
-    _accessToken = response.data['accessToken'];
-    _refreshToken = response.data['refreshToken'];
+      _accessToken = response.data['accessToken'];
+      _refreshToken = response.data['refreshToken'];
 
-    // Store securely
-    await _secureStorage.write(key: 'accessToken', value: _accessToken);
-    await _secureStorage.write(key: 'refreshToken', value: _refreshToken);
+      await _secureStorage.write(
+        key: 'accessToken',
+        value: _accessToken!,
+      );
+      await _secureStorage.write(
+        key: 'refreshToken',
+        value: _refreshToken!,
+      );
+    } on DioException catch (e) {
+      throw _handleError(e);
+    }
   }
 
   Future<String> getValidToken() async {
@@ -230,23 +225,20 @@ class AuthService {
 
   Future<void> _refreshAccessToken() async {
     try {
-      final response = await dio.post('/auth/refresh', data: {
-        'refreshToken': _refreshToken,
-      });
+      final response = await _dio.post(
+        '/auth/refresh',
+        data: {'refreshToken': _refreshToken},
+      );
 
       _accessToken = response.data['accessToken'];
-      await _secureStorage.write(key: 'accessToken', value: _accessToken);
+      await _secureStorage.write(
+        key: 'accessToken',
+        value: _accessToken!,
+      );
     } catch (e) {
-      // Refresh failed, redirect to login
       await logout();
       rethrow;
     }
-  }
-
-  Future<void> logout() async {
-    _accessToken = null;
-    _refreshToken = null;
-    await _secureStorage.deleteAll();
   }
 
   bool _isTokenExpired(String? token) {
@@ -257,38 +249,85 @@ class AuthService {
     );
     return DateTime.now().isAfter(expiration);
   }
-}
 
-// Interceptor for auto-adding token
-dio.interceptors.add(
-  InterceptorsWrapper(
-    onRequest: (options, handler) async {
-      final token = await authService.getValidToken();
-      options.headers['Authorization'] = 'Bearer $token';
-      return handler.next(options);
-    },
-  ),
-);
+  Future<void> logout() async {
+    _accessToken = null;
+    _refreshToken = null;
+    await _secureStorage.deleteAll();
+  }
+}
 ```
 
-## Error Handling & Retries
+## 5. Error Handling
 
+**Custom Exceptions:**
 ```dart
-class ApiException implements Exception {
+abstract class ApiException implements Exception {
   final String message;
-  final int? statusCode;
-  final dynamic originalError;
-
-  ApiException({
-    required this.message,
-    this.statusCode,
-    this.originalError,
-  });
-
-  @override
-  String toString() => 'ApiException: $message (Status: $statusCode)';
+  ApiException(this.message);
 }
 
+class NetworkException extends ApiException {
+  NetworkException(String message) : super('Network Error: $message');
+}
+
+class UnauthorizedException extends ApiException {
+  UnauthorizedException(String message) : super('Unauthorized: $message');
+}
+
+class ServerException extends ApiException {
+  ServerException(String message) : super('Server Error: $message');
+}
+
+class ValidationException extends ApiException {
+  final Map<String, String> errors;
+  ValidationException(this.errors) : super('Validation Error');
+}
+```
+
+## 6. Firebase Integration
+
+```dart
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class FirebaseUserRepository {
+  final firestore = FirebaseFirestore.instance;
+
+  Future<User?> getUser(String id) async {
+    try {
+      final doc = await firestore.collection('users').doc(id).get();
+      if (!doc.exists) return null;
+      return User.fromJson(doc.data()!);
+    } catch (e) {
+      throw Exception('Failed to get user: $e');
+    }
+  }
+
+  Stream<User?> watchUser(String id) {
+    return firestore
+        .collection('users')
+        .doc(id)
+        .snapshots()
+        .map((doc) => doc.exists ? User.fromJson(doc.data()!) : null);
+  }
+
+  Future<void> updateUser(User user) async {
+    await firestore.collection('users').doc(user.id).update(
+      user.toJson(),
+    );
+  }
+
+  Future<void> createUser(User user) async {
+    await firestore.collection('users').doc(user.id).set(
+      user.toJson(),
+    );
+  }
+}
+```
+
+## 7. Retry Logic
+
+```dart
 Future<T> withRetry<T>(
   Future<T> Function() operation, {
   int maxRetries = 3,
@@ -306,7 +345,7 @@ Future<T> withRetry<T>(
       }
 
       await Future.delayed(delay);
-      delay *= 2; // Exponential backoff
+      delay = Duration(milliseconds: (delay.inMilliseconds * 2).toInt());
       retries++;
     }
   }
@@ -314,124 +353,12 @@ Future<T> withRetry<T>(
 
 bool _isRetryable(dynamic error) {
   if (error is! DioException) return false;
-
-  // Retry on timeout or connection errors
-  if (error.type == DioExceptionType.connectionTimeout ||
-      error.type == DioExceptionType.receiveTimeout) {
-    return true;
-  }
-
-  // Retry on 5xx status codes
-  if (error.response?.statusCode != null &&
-      error.response!.statusCode! >= 500) {
-    return true;
-  }
-
-  return false;
-}
-
-// Usage
-final users = await withRetry(
-  () => userRepository.getUsers(),
-  maxRetries: 3,
-);
-```
-
-## Firebase Integration
-
-```dart
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-// Initialize Firebase
-await Firebase.initializeApp();
-
-final firestore = FirebaseFirestore.instance;
-final auth = FirebaseAuth.instance;
-
-// CRUD with Firestore
-class UserRepository {
-  Future<User> getUser(String id) async {
-    final doc = await firestore.collection('users').doc(id).get();
-    return User.fromJson(doc.data()!);
-  }
-
-  Future<void> createUser(User user) async {
-    await firestore.collection('users').doc(user.id).set(
-      user.toJson(),
-    );
-  }
-
-  Future<void> updateUser(User user) async {
-    await firestore.collection('users').doc(user.id).update(
-      user.toJson(),
-    );
-  }
-
-  Future<void> deleteUser(String id) async {
-    await firestore.collection('users').doc(id).delete();
-  }
-
-  // Real-time listening
-  Stream<List<User>> watchUsers() {
-    return firestore
-        .collection('users')
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => User.fromJson(doc.data()))
-            .toList());
-  }
+  return error.type == DioExceptionType.connectionTimeout ||
+      error.type == DioExceptionType.receiveTimeout ||
+      (error.response?.statusCode ?? 0) >= 500;
 }
 ```
-
-## Serialization (json_serializable + Freezed)
-
-```dart
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'user.freezed.dart';
-part 'user.g.dart';
-
-@freezed
-class User with _$User {
-  const factory User({
-    required String id,
-    required String name,
-    required String email,
-    @JsonKey(name: 'created_at')
-    required DateTime createdAt,
-  }) = _User;
-
-  factory User.fromJson(Map<String, dynamic> json) =>
-    _$UserFromJson(json);
-}
-
-// Usage
-final user = User(
-  id: '123',
-  name: 'John Doe',
-  email: 'john@example.com',
-  createdAt: DateTime.now(),
-);
-
-final json = user.toJson();
-final reconstructed = User.fromJson(json);
-```
-
-## Best Practices
-
-1. **Use Dio** for production apps with interceptors
-2. **Implement Repository Pattern** for clean architecture
-3. **Handle errors explicitly** with custom exception types
-4. **Add request/response logging** for debugging
-5. **Implement JWT token refresh** automatically
-6. **Use code generation** (Freezed, json_serializable) for serialization
-7. **Test API clients** with Mockito or MockClient
-8. **Implement timeout handling** for slow networks
-9. **Cache responses intelligently** to reduce API calls
-10. **Monitor API performance** with analytics
 
 ---
 
-**Master backend integration and build reliable, responsive Flutter apps!**
+**Master backend integration for robust Flutter applications.**

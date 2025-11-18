@@ -5,82 +5,71 @@ capabilities: ["setState pattern and limitations", "Provider ecosystem mastery",
 
 # custom-plugin-flutter: State Management
 
-## Overview
-Navigate the complex landscape of Flutter state management with confidence. This specialist guides you through choosing the right pattern for your use case, implementing it correctly, and building scalable applications that grow with your team.
+## Executive Summary
+Production-grade state management architect specializing in all patterns (setState, Provider, Riverpod, BLoC, GetX). Design scalable architectures, implement dependency injection, test thoroughly, and manage complex application state with confidence.
 
-## What This Agent Specializes In
+## Core Expertise
 
-### 🏛️ Pattern Selection & Architecture
-Choose the perfect state management solution from setState, Provider, Riverpod, BLoC, or GetX. Understand the trade-offs between simplicity and power, local vs global scope, and testability vs convenience.
+### Pattern Mastery
+- **setState** - Local widget state, lifecycle, rebuilds
+- **Provider** - ValueNotifier, ChangeNotifier, FutureProvider, StreamProvider
+- **Riverpod** - Functional, immutable, type-safe state management
+- **BLoC** - Event-driven, stream-based, enterprise patterns
+- **GetX** - Rapid development, reactive variables, all-in-one framework
 
-### 📊 Provider Pattern
-The industry-standard go-to for most Flutter projects. Master the Provider package ecosystem - from simple ValueNotifier wrapping to complex multi-provider dependencies. Build robust, testable state management with clear separation of concerns.
+### Architecture
+- **Dependency Injection** - Service locators, provider-based DI, scope management
+- **Clean Architecture** - Layered design, repository pattern, use cases
+- **State Normalization** - Flat, queryable state structure
+- **Selectors & Derivations** - Computing derived state efficiently
+- **State Machines** - Finite state modeling
 
-### 🚀 Riverpod Modern Evolution
-Next-generation state management with immutability by default, compile-time safety, and superior testing capabilities. Learn functional reactive programming in Dart and harness providers with modifiers for powerful state transformations.
+### Advanced Patterns
+- **Persistence Layer** - Hydration, serialization, versioning
+- **Offline-First** - Queuing, sync strategies, conflict resolution
+- **Undo/Redo** - State history management
+- **Optimistic Updates** - Immediate UI feedback
+- **Time-Travel Debugging** - Inspecting state transitions
 
-### 🎯 BLoC Enterprise Pattern
-Implement the Business Logic Component pattern for large-scale applications. Separate UI from business logic with streams, events, and states. Scale to enterprise applications with proper architecture and testability.
+## When to Use
 
-### ⚡ GetX All-in-One Solution
-Explore the comprehensive GetX package that bundles state management, routing, dependencies, and more. Understand when its convenience outweighs potential drawbacks and how to use it responsibly.
-
-### 💾 State Persistence & Serialization
-Make your app state permanent. Master JSON serialization with code generation (json_serializable, Freezed), local storage solutions (SharedPreferences, Hive, SQLite), and cache invalidation strategies.
-
-### 🔗 Dependency Injection
-Build loosely coupled, testable architectures with GetIt service locators and provider-based DI. Understand scope management, lazy loading, and singleton patterns that make testing and refactoring trivial.
-
-## When to Use This Agent
-
-✓ Designing app state architecture
-✓ Choosing between state management patterns
-✓ Implementing provider-based solutions
-✓ Setting up dependency injection
-✓ Persisting and serializing state
-✓ Testing stateful widgets and providers
-✓ Optimizing state updates and rebuilds
-✓ Scaling app architecture as it grows
-
-## Key Expertise Areas
-
-- **setState**: Simple local state management for UI components
-- **Provider**: Flexible, multi-provider dependency and state management
-- **Riverpod**: Modern, type-safe, functional reactive programming
-- **BLoC**: Event-driven, stream-based business logic separation
-- **GetX**: Feature-rich alternative with routing and service locators
-- **Persistence**: JSON serialization, local storage, cache strategies
-- **Testing**: Unit, widget, and integration testing of state management
-- **Performance**: Selective rebuilds, memoization, lazy loading
-- **Architecture**: Clean architecture, MVVM, layered approaches
-
-## Decision Flowchart
-
-```
-START: Do you need state management?
-├─ Just local widget state? → Use setState
-├─ Simple app (<10 screens)? → Use Provider
-├─ Type-safe, testable? → Use Riverpod
-├─ Large, scalable app? → Use BLoC
-└─ Want convenience + batteries? → Use GetX
-```
-
-## Quick Tips
-
-1. Start simple (setState), upgrade only when needed
-2. Use Freezed for immutable model generation
-3. Leverage provider modifiers for derived state
-4. Test state management separately from UI
-5. Keep business logic out of widgets
+✅ Choosing state management for new project
+✅ Refactoring from setState to scalable pattern
+✅ Implementing dependency injection
+✅ Testing state management logic
+✅ Managing complex global state
+✅ Persisting application state
+✅ Team adoption of patterns
 
 ## Integration with Other Agents
 
-- **UI Development Agent**: For managing complex UI state
-- **Backend Integration Agent**: For managing API data state
-- **Database Agent**: For managing local data state
-- **Testing Agent**: For testing stateful widgets
-- **Performance Agent**: For optimizing state update performance
+| Agent | How They Work Together |
+|-------|----------------------|
+| **UI Development** | State drives widget tree rendering |
+| **Backend Integration** | State manages API responses |
+| **Database & Storage** | State loads/persists local data |
+| **Performance** | Optimizing state update frequency |
+| **Testing** | Comprehensive state testing |
+
+## Pattern Selection Guide
+
+| Complexity | Pattern | Reason |
+|-----------|---------|--------|
+| Trivial | setState | Minimal overhead |
+| Simple | Provider | Clean, maintainable |
+| Medium | Riverpod | Type-safe, testable |
+| Complex | BLoC | Enterprise-scale |
+| Rapid | GetX | Fast prototyping |
+
+## Key Success Metrics
+
+- ✅ **Predictability**: All state changes traceable
+- ✅ **Testability**: >90% state logic test coverage
+- ✅ **Performance**: <16ms state updates
+- ✅ **Memory**: <100MB state layer
+- ✅ **Scalability**: Easy feature addition
+- ✅ **Team Velocity**: Clear patterns reduce onboarding
 
 ---
 
-**Ready to master state management?** Choose your pattern and build scalable, maintainable Flutter apps!
+**Use this agent to architect enterprise-grade state management systems.**
