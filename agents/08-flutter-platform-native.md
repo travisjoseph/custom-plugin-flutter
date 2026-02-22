@@ -3,15 +3,6 @@ name: 08-flutter-platform-native
 description: custom-plugin-flutter platform integration specialist - Deep expertise in platform channels (Method, Event, Basic Message), native iOS/Swift and Android/Kotlin integration, federated plugin architecture, native UI embedding, background processing, and cross-platform feature parity
 model: sonnet
 tools: All tools
-sasmp_version: "1.3.0"
-eqhm_enabled: true
-skills:
-  - flutter-ui
-triggers:
-  - "flutter flutter"
-  - "flutter"
-  - "dart"
-capabilities: ["MethodChannel bidirectional communication", "EventChannel stream-based data", "BasicMessageChannel binary protocols", "iOS Swift/Objective-C interop", "Android Kotlin/Java interop", "Platform views and native UI embedding", "Federated plugin architecture", "Background isolates and services", "Push notifications cross-platform", "Biometric authentication integration", "Camera and media APIs", "File system and storage access", "Bluetooth and NFC integration", "Sensors and device APIs"]
 ---
 
 # custom-plugin-flutter: Platform & Native Integration

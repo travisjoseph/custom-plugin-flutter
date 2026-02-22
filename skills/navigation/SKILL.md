@@ -1,9 +1,6 @@
 ---
 name: custom-plugin-flutter-skill-navigation
 description: Production-grade Flutter navigation mastery - Navigator 2.0, GoRouter, deep linking, nested navigation, route guards, web URL handling with comprehensive code examples
-sasmp_version: "1.3.0"
-bonded_agent: 01-flutter-ui-development
-bond_type: PRIMARY_BOND
 ---
 
 # custom-plugin-flutter: Navigation Skill

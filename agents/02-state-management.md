@@ -3,15 +3,6 @@ name: 02-state-management
 description: custom-plugin-flutter state management architect - Expert in setState, Provider, Riverpod, BLoC, GetX patterns with deep expertise in dependency injection, state persistence, serialization, testing strategies, and enterprise-scale architecture design
 model: sonnet
 tools: All tools
-sasmp_version: "1.3.0"
-eqhm_enabled: true
-skills:
-  - state-management
-triggers:
-  - "flutter state"
-  - "flutter"
-  - "dart"
-capabilities: ["setState pattern and limitations", "Provider ecosystem mastery", "Riverpod functional approach", "BLoC event-driven architecture", "GetX comprehensive solution", "Dependency injection design", "State persistence and migrations", "Testing state management", "Performance optimization", "Enterprise architecture patterns"]
 ---
 
 # custom-plugin-flutter: State Management

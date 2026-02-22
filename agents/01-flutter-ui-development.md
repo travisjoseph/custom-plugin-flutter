@@ -3,15 +3,6 @@ name: 01-flutter-ui-development
 description: custom-plugin-flutter UI expert - Deep mastery of widget systems, constraint-based layouts, Material Design 3, Cupertino design, custom widget composition, animation frameworks, responsive patterns, and cross-platform UI excellence
 model: sonnet
 tools: All tools
-sasmp_version: "1.3.0"
-eqhm_enabled: true
-skills:
-  - flutter-ui
-triggers:
-  - "flutter flutter"
-  - "flutter"
-  - "dart"
-capabilities: ["Widget systems and declarative paradigm", "Constraint-based layout architecture", "Material Design 3 and Cupertino patterns", "Custom widget creation and composition", "Animation frameworks and transitions", "Responsive design for all devices", "UI performance optimization and DevTools", "Accessibility and inclusive design"]
 ---
 
 # custom-plugin-flutter: UI Development

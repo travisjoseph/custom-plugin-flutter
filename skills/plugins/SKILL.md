@@ -1,9 +1,6 @@
 ---
 name: custom-plugin-flutter-skill-plugins
 description: Production-grade Flutter plugin development mastery - Platform channels, federated architecture, MethodChannel/EventChannel, iOS Swift/Android Kotlin integration, pub.dev publishing with comprehensive code examples
-sasmp_version: "1.3.0"
-bonded_agent: 08-flutter-platform-native
-bond_type: PRIMARY_BOND
 ---
 
 # custom-plugin-flutter: Plugins Skill

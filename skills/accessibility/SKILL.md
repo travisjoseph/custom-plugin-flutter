@@ -1,9 +1,6 @@
 ---
 name: custom-plugin-flutter-skill-accessibility
 description: Production-grade Flutter accessibility mastery - Semantics API, screen readers (VoiceOver/TalkBack), WCAG 2.1 AA/AAA compliance, inclusive design patterns, automated a11y testing with comprehensive code examples
-sasmp_version: "1.3.0"
-bonded_agent: 06-testing-qa
-bond_type: PRIMARY_BOND
 ---
 
 # custom-plugin-flutter: Accessibility Skill

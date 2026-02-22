@@ -1,9 +1,6 @@
 ---
 name: custom-plugin-flutter-skill-localization
 description: Production-grade Flutter localization mastery - ARB files, flutter_localizations, intl package, pluralization, RTL support, dynamic locale switching with comprehensive code examples
-sasmp_version: "1.3.0"
-bonded_agent: 01-flutter-ui-development
-bond_type: PRIMARY_BOND
 ---
 
 # custom-plugin-flutter: Localization Skill

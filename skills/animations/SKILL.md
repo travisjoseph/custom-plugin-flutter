@@ -1,9 +1,6 @@
 ---
 name: custom-plugin-flutter-skill-animations
 description: Production-grade Flutter animations mastery - Implicit and explicit animations, AnimationController, Hero transitions, physics-based motion, Lottie/Rive integration, 60fps optimization with comprehensive code examples
-sasmp_version: "1.3.0"
-bonded_agent: 01-flutter-ui-development
-bond_type: PRIMARY_BOND
 ---
 
 # custom-plugin-flutter: Animations Skill
